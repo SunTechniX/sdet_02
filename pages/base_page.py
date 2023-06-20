@@ -38,7 +38,6 @@ class BasePage():
     def click_to_cart_pic(self):
         self.browser.find_element(*BasePageLocators.CART_PIC_LINK).click()
 
-
     def click_home_btn(self):
         self.browser.find_element(*BasePageLocators.HOME_BTN).click()
 
