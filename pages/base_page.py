@@ -1,54 +1,34 @@
-from selenium.common.exceptions import NoAlertPresentException, NoSuchElementException, TimeoutException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from .locators import BasePageLocators
 
-class BasePage():
+
+class BasePage:
     def __init__(self, browser, url):
         self.browser = browser
         self.url = url
 
-    def open(self):
-        print('==>> open self.url')
+    def open_url(self):
         self.browser.get(self.url)
 
-    def is_element_present_silent(self, how, what):
+    def is_element_present(self, locator, timeout=30):
         try:
-            self.browser.find_element(how, what)
-        except:
-            return False
-        return True
-
-    def is_element_present_simple(self, how, what):
-        try:
-            self.browser.find_element(how, what)
-        except (NoSuchElementException):
-            return False
-        return True
-
-    def is_element_present(self, how, what, timeout=30):
-        try:
-            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located(locator))
         except TimeoutException:
             return False
-        except NoSuchElementException:
-            return False
         return True
 
-    def click_to_cart_pic(self):
-        self.browser.find_element(*BasePageLocators.CART_PIC_LINK).click()
+    def click_to_element(self, locator):
+        self.get_element(locator).click()
 
-    def click_home_btn(self):
-        self.browser.find_element(*BasePageLocators.HOME_BTN).click()
+    def get_element(self, locator):
+        return self.browser.find_element(*locator)
 
-    def click_logout_btn(self):
-        self.browser.find_element(*BasePageLocators.LOGOUT_BTN).click()
+    def get_element_text(self, locator):
+        return self.get_element(locator).text
 
-    def should_be_cart_pic(self):
-        assert self.is_element_present(*BasePageLocators.CART_PIC_LINK), "Cart picture link is not presented"
+    def run_script(self, script, element):
+        self.browser.execute_script(script, element)
 
-    def should_be_home_btn(self):
-        assert self.is_element_present(*BasePageLocators.HOME_BTN), "Where is HOME Button? This button is not presented"
-
-    def should_be_logout_btn(self):
-        assert self.is_element_present(*BasePageLocators.LOGOUT_BTN), "Logout Button is not presented"
+    def write_to_element(self, locator, text):
+        self.get_element(locator).send_keys(text)

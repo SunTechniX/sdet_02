@@ -1,50 +1,30 @@
-from .base_page import BasePage
+from .main_page import MainPage
 from .locators import CartPageLocators
 
 
-class CartPage(BasePage):
-    def check_cart_backpack_name(self, name):
-        assert name == self.browser.find_element(*CartPageLocators.CART_BACKPACK_NAME).text, "BackPack Name is not equal"
+class CartPage(MainPage):
+    def assert_cart_name(self, num, name):
+        assert name == self.get_element_text(CartPageLocators.cart_item(num, 'name')), name + " Name is not equal"
 
-    def check_cart_backpack_price(self, price):
-        price_s = self.browser.find_element(*CartPageLocators.CART_BACKPACK_PRICE).text
-        assert price == float(price_s[1:]), "BackPack Price is not equal"
-
-    def check_cart_tshirt_name(self, name):
-        assert name == self.browser.find_element(*CartPageLocators.CART_TSHIRT_NAME).text, "T-shirt Name is not equal"
-
-    def check_cart_tshirt_price(self, price):
-        price_s = self.browser.find_element(*CartPageLocators.CART_TSHIRT_PRICE).text
-        assert price == float(price_s[1:]), "T-shirt Price is not equal"
+    def assert_cart_price(self, num, price):
+        price_s = self.get_element_text(CartPageLocators.cart_item(num, 'price'))
+        assert price == float(price_s[1:]), "Price is not equal"
 
     def click_checkout_button(self):
-        self.browser.find_element(*CartPageLocators.CART_CHECKOUT_BUTTON).click()
+        self.click_to_element(CartPageLocators.CART_CHECKOUT_BUTTON)
 
-    def get_cart_backpack_name(self):
-        return self.browser.find_element(*CartPageLocators.CART_BACKPACK_NAME).text
+    def get_cart_name(self, num):
+        return self.get_element_text(CartPageLocators.cart_item(num, 'name'))
 
-    def get_cart_backpack_price(self):
-        price_s = self.browser.find_element(*CartPageLocators.CART_BACKPACK_PRICE).text
+    def get_cart_price(self, num):
+        price_s = self.get_element_text(CartPageLocators.cart_item(num, 'price'))
         return float(price_s[1:])
 
-    def get_cart_tshirt_name(self):
-        return self.browser.find_element(*CartPageLocators.CART_TSHIRT_NAME).text
+    def present_cart_name(self, num):
+        assert self.is_element_present(CartPageLocators.cart_item(num, 'name')), "Name is not presented"
 
-    def get_cart_tshirt_price(self):
-        price_s = self.browser.find_element(*CartPageLocators.CART_TSHIRT_PRICE).text
-        return float(price_s[1:])
+    def present_cart_price(self, num):
+        assert self.is_element_present(CartPageLocators.cart_item(num, 'price')), "Price is not presented"
 
-    def should_be_cart_backpack_name(self):
-        assert self.is_element_present(*CartPageLocators.CART_BACKPACK_NAME), "BackPack Name is not presented"
-
-    def should_be_cart_backpack_price(self):
-        assert self.is_element_present(*CartPageLocators.CART_BACKPACK_PRICE), "BackPack Price is not presented"
-
-    def should_be_cart_tshirt_name(self):
-        assert self.is_element_present(*CartPageLocators.CART_TSHIRT_NAME), "T-Shirt Name is not presented"
-
-    def should_be_cart_tshirt_price(self):
-        assert self.is_element_present(*CartPageLocators.CART_TSHIRT_PRICE), "T-Shirt Price is not presented"
-
-    def should_be_checkout_button(self):
-        assert self.is_element_present(*CartPageLocators.CART_CHECKOUT_BUTTON), "Checkout Button is not presented"
+    def present_checkout_button(self):
+        assert self.is_element_present(CartPageLocators.CART_CHECKOUT_BUTTON), "Checkout Button is not presented"
