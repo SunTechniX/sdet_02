@@ -1,7 +1,10 @@
 import os
+
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as Options_Chrome
+
+from data.link_data import LinkData
 
 
 def pytest_addoption(parser):
@@ -10,7 +13,8 @@ def pytest_addoption(parser):
     parser.addoption('--headless', action='store', default='false',
                      help="Open a browser invisible, without GUI is used by default")
 
-@pytest.fixture
+
+@pytest.fixture(params=[LinkData.LINK])
 def browser(request):
     browser_name = request.config.getoption("browser_name")
     headless = request.config.getoption('headless')
@@ -33,5 +37,6 @@ def browser(request):
             desired_capabilities={"browserName": "chrome", 'javascriptEnabled': True})
     else:
         raise pytest.UsageError("--browser_name should be chrome, firefox or hub")
+    browser.get(request.param)
     yield browser
     browser.quit()

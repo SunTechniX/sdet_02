@@ -12,11 +12,11 @@ class AccountPageLocators:
 
 
 class CartPageLocators:
+    CART_CHECKOUT_BUTTON = (By.CSS_SELECTOR, '#checkout')
+
     @staticmethod
     def cart_item(num, field):
         return By.XPATH, f"//div[@class='cart_item'][{num}]//div[@class='inventory_item_{field}']"
-
-    CART_CHECKOUT_BUTTON = (By.CSS_SELECTOR, '#checkout')
 
 
 class CheckoutPageLocators:
@@ -25,11 +25,12 @@ class CheckoutPageLocators:
     CHECKOUT_POSTAL_CODE = (By.CSS_SELECTOR, '#postal-code')
     CHECKOUT_CONTINUE_BUTTON = (By.CSS_SELECTOR, '#continue')
     CHECKOUT_SUBTOTAL_PRICE = (By.CSS_SELECTOR, '.summary_subtotal_label')
-    CHECKOUT_BACKPACK_NAME = (By.XPATH, "//div[@class='cart_item'][1]//div[@class='inventory_item_name']")
-    CHECKOUT_TSHIRT_NAME = (By.XPATH, "//div[@class='cart_item'][2]//div[@class='inventory_item_name']")
     CHECKOUT_FINISH_BUTTON = (By.CSS_SELECTOR, '#finish')
     CHECKOUT_THANKS_MSG = (By.XPATH, "//h2[contains(text(),'Thank you for your order!')]")
 
+    @staticmethod
+    def checkout_product_name(num):
+        return By.XPATH, f"//div[@class='cart_item'][{num}]//div[@class='inventory_item_name']"
 
 class LoginPageLocators:
     USERNAME_FIELD = (By.CSS_SELECTOR, '#user-name')
@@ -45,9 +46,7 @@ class MainPageLocators:
 class ProductsPageLocators:
     @staticmethod
     def product_name(name):
-        return By.XPATH, "//div[@class='inventory_item_name'][contains(text(),'" + name + "')]"
-
-    PROD_FOCUS_SCRIPT = "return arguments[0].scrollIntoView(true);"
+        return By.XPATH, f"//div[@class='inventory_item_name'][contains(text(),'{name}')]"
 
 
 class StuffPageLocators:
@@ -56,4 +55,3 @@ class StuffPageLocators:
     STUFF_ADD_TO_CART_BUTTON = (By.XPATH, "//button[contains(text(),'Add to cart')]")
     STUFF_BACK_TO_PRODUCTS_BUTTON = (By.CSS_SELECTOR, "button[name='back-to-products']")
     STUFF_REMOVE_FROM_CART_BUTTON = (By.XPATH, "//button[contains(text(),'Remove')]")
-
