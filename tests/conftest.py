@@ -14,7 +14,7 @@ def pytest_addoption(parser):
                      help="Open a browser invisible, without GUI is used by default")
 
 
-@pytest.fixture(params=[LinkData.LINK])
+@pytest.fixture()
 def browser(request):
     browser_name = request.config.getoption("browser_name")
     headless = request.config.getoption('headless')
@@ -37,6 +37,6 @@ def browser(request):
             desired_capabilities={"browserName": "chrome", 'javascriptEnabled': True})
     else:
         raise pytest.UsageError("--browser_name should be chrome, firefox or hub")
-    browser.get(request.param)
+    browser.get(LinkData.LINK)
     yield browser
     browser.quit()
