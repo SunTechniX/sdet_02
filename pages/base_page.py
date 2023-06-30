@@ -19,7 +19,7 @@ class BasePage:
 
     def get_element(self, locator, timeout=10):
         return WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located(locator))
-        #return self.browser.find_element(*locator)
+        # return self.browser.find_element(*locator)
 
     def get_element_text(self, locator):
         return self.get_element(locator).text
@@ -29,4 +29,4 @@ class BasePage:
 
     def write_to_element(self, locator, text, timeout=10):
         WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located(locator)).send_keys(text)
-        #self.get_element(locator).send_keys(text)
+        # self.get_element(locator).send_keys(text)

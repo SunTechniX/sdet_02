@@ -8,4 +8,3 @@ class LoginPage(MainPage):
         self.write_to_element(LoginPageLocators.USERNAME_FIELD, LoginData.USER)
         self.write_to_element(LoginPageLocators.PASSWORD_FIELD, LoginData.PASS)
         self.click_to_element(LoginPageLocators.LOGIN_BTN)
-
