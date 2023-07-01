@@ -15,7 +15,13 @@ class CartPageLocators:
     CART_CHECKOUT_BUTTON = (By.CSS_SELECTOR, '#checkout')
 
     @staticmethod
-    def cart_item(num, field):
+    def cart_item(num: int, field: str) -> tuple[By, str]:
+        '''
+        Вернуть совокупный локатор в виде кортежа из метода поиска элемента (By) и локатора элемента (str)
+
+        :param num: номер товара в списке (int)
+        :param field: 'name' или 'price' (str)
+        '''
         return By.XPATH, f"//div[@class='cart_item'][{num}]//div[@class='inventory_item_{field}']"
 
 
@@ -29,7 +35,12 @@ class CheckoutPageLocators:
     CHECKOUT_THANKS_MSG = (By.XPATH, "//h2[contains(text(),'Thank you for your order!')]")
 
     @staticmethod
-    def checkout_product_name(num):
+    def checkout_product_name(num: int) -> tuple[By, str]:
+        '''
+        Вернуть совокупный локатор в виде кортежа из метода поиска элемента (By) и локатора элемента (str)
+
+        :param num: номер товара в списке (int)
+        '''
         return By.XPATH, f"//div[@class='cart_item'][{num}]//div[@class='inventory_item_name']"
 
 class LoginPageLocators:
@@ -45,7 +56,12 @@ class MainPageLocators:
 
 class ProductsPageLocators:
     @staticmethod
-    def product_name(name):
+    def product_name(name: str) -> tuple[By, str]:
+        '''
+        Вернуть совокупный локатор в виде кортежа из метода поиска элемента (By) и локатора элемента (str)
+
+        :param name: краткое наименование товара (содержится в полном названии WebElement-а) (str)
+        '''
         return By.XPATH, f"//div[@class='inventory_item_name'][contains(text(),'{name}')]"
 
 
