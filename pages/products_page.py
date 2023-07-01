@@ -4,7 +4,7 @@ from data.locators import ProductsPageLocators
 
 
 class ProductsPage(MainPage):
-    def add_to_cart(self, browser, stuff: str, cart_data: dict) -> None:
+    def add_to_cart(self, browser, stuff: str, cart_data: dict[str, float]) -> None:
         '''
         Поместить товар в корзину
 
@@ -15,7 +15,7 @@ class ProductsPage(MainPage):
         полное название продукта и его цена сохраняются в словарь cart_data
         нажимается ссылка 'Back to products'
 
-        :param stuff: название товара, который нужно положить в корзину, например 'Backpack', 'T-Shirt'
+        :param stuff: короткое название товара, который нужно положить в корзину, например 'Backpack', 'T-Shirt'
         :param cart_data: словарь, хранящий полное название продукта (str) и его цену (float)
         '''
         self.click_to_product(stuff)
@@ -25,8 +25,12 @@ class ProductsPage(MainPage):
         cart_data[stuff_page.get_name()] = stuff_page.get_price()
         stuff_page.click_back_to_products()
 
-    def click_to_product(self, name: str):
-        ''' Проскроллировать страницу до продукта и кликнуть по нему '''
+    def click_to_product(self, name: str) -> None:
+        '''
+        Проскроллировать страницу до продукта и кликнуть по нему
+
+        :param name: короткое название продукта (str)
+        '''
         product = self.get_element(ProductsPageLocators.product_name(name))
         self.scroll_to_element(product)
         product.click()

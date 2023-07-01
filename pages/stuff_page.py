@@ -3,16 +3,16 @@ from data.locators import StuffPageLocators
 
 
 class StuffPage(MainPage):
-    def assert_remove_from_cart_button(self):
+    def assert_remove_from_cart_button(self) -> None:
         ''' Проверка наличия кнопки "Remove" '''
         assert self.is_element_present(StuffPageLocators.STUFF_REMOVE_FROM_CART_BUTTON),\
             "Remove-from-Cart button is not presented"
 
-    def click_add_to_cart(self):
+    def click_add_to_cart(self) -> None:
         ''' Нажать кнопку добавления товара в корзину '''
         self.click_to_element(StuffPageLocators.STUFF_ADD_TO_CART_BUTTON)
 
-    def click_back_to_products(self):
+    def click_back_to_products(self) -> None:
         ''' Нажать кнопку возврата к списку продуктов '''
         self.click_to_element(StuffPageLocators.STUFF_BACK_TO_PRODUCTS_BUTTON)
 
