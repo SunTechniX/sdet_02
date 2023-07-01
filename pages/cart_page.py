@@ -11,9 +11,6 @@ class CartPage(MainPage):
 
         self.click_checkout_button()
 
-    def assert_checkout_button(self):
-        assert self.is_element_present(CartPageLocators.CART_CHECKOUT_BUTTON), "Checkout Button is not presented"
-
     def click_checkout_button(self):
         self.click_to_element(CartPageLocators.CART_CHECKOUT_BUTTON)
 
