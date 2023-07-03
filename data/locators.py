@@ -44,10 +44,14 @@ class CheckoutPageLocators:
         return By.XPATH, f"//div[@class='cart_item'][{num}]//div[@class='inventory_item_name']"
 
 class LoginPageLocators:
-    USERNAME_FIELD = (By.CSS_SELECTOR, '#user-name')
-    PASSWORD_FIELD = (By.CSS_SELECTOR, '#password')
-    LOGIN_BTN = (By.CSS_SELECTOR, '#login-button')
+    @staticmethod
+    def login_field(field: str) -> tuple[By, str]:
+        '''
+        Вернуть совокупный локатор в виде кортежа из метода поиска элемента (By) и локатора элемента (str)
 
+        :param field: идентификатор элемента (str)
+        '''
+        return By.CSS_SELECTOR, f'#{field}'
 
 class MainPageLocators:
     CART_PIC_LINK = (By.CSS_SELECTOR, '.shopping_cart_link')
