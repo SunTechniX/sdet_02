@@ -41,22 +41,3 @@ class CheckoutPage(MainPage):
         self.write_to_element(CheckoutPageLocators.CHECKOUT_LAST_NAME, PersonData.LAST_NAME)
         self.write_to_element(CheckoutPageLocators.CHECKOUT_POSTAL_CODE, PersonData.POSTAL_CODE)
         self.click_continue_button()
-
-    def go_checkout(self, cart_data: dict[str, float]) -> None:
-        '''
-        Оформление заказа
-
-        вызвать функцию заполения данными покупателя,
-        проверить точность заказа:
-        - проверяется совпадение названий товаров, которые ложили в корзину и их цены
-        - проверяется точно подсчёта суммы заказа
-        нажать кнопку Finish
-
-        :param cart_data: словарь, хранящий полное название продукта (str) и его цену (float)
-        '''
-        self.fill_person_data_fields()
-        for i, name in enumerate(cart_data.keys(), start=1):
-            self.assert_cart_item_name(i, name)
-
-        self.assert_cart_subtotal_price(sum(cart_data.values()))
-        self.click_finish_button()

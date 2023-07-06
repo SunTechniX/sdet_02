@@ -14,7 +14,7 @@ def pytest_addoption(parser):
                      help="Open a browser invisible, without GUI is used by default")
 
 
-@pytest.fixture()
+@pytest.fixture
 def browser(request):
     browser_name = request.config.getoption("browser_name")
     headless = request.config.getoption('headless')
@@ -40,3 +40,7 @@ def browser(request):
     browser.get(LinkData.LINK)
     yield browser
     browser.quit()
+
+@pytest.fixture
+def browser_del_cookie(browser):
+    browser.delete_all_cookies()
