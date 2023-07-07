@@ -17,10 +17,10 @@ class CartPageLocators:
     @staticmethod
     def cart_item(num: int, field: str) -> tuple[By, str]:
         '''
-        Вернуть совокупный локатор в виде кортежа из метода поиска элемента (By) и локатора элемента (str)
+        Возвращает совокупный локатор в виде кортежа из метода поиска элемента и локатора элемента
 
-        :param num: номер товара в списке (int)
-        :param field: 'name' или 'price' (str)
+        :param num: номер товара в списке
+        :param field: 'name' или 'price'
         '''
         return By.XPATH, f"//div[@class='cart_item'][{num}]//div[@class='inventory_item_{field}']"
 
@@ -37,21 +37,23 @@ class CheckoutPageLocators:
     @staticmethod
     def checkout_product_name(num: int) -> tuple[By, str]:
         '''
-        Вернуть совокупный локатор в виде кортежа из метода поиска элемента (By) и локатора элемента (str)
+        Возвращает совокупный локатор в виде кортежа из метода поиска элемента и локатора элемента
 
-        :param num: номер товара в списке (int)
+        :param num: номер товара в списке
         '''
         return By.XPATH, f"//div[@class='cart_item'][{num}]//div[@class='inventory_item_name']"
+
 
 class LoginPageLocators:
     @staticmethod
     def login_field(field: str) -> tuple[By, str]:
         '''
-        Вернуть совокупный локатор в виде кортежа из метода поиска элемента (By) и локатора элемента (str)
+        Возвращает совокупный локатор в виде кортежа из метода поиска элемента и локатора элемента
 
-        :param field: идентификатор элемента (str)
+        :param field: идентификатор элемента
         '''
         return By.CSS_SELECTOR, f'#{field}'
+
 
 class MainPageLocators:
     CART_PIC_LINK = (By.CSS_SELECTOR, '.shopping_cart_link')
@@ -62,9 +64,9 @@ class ProductsPageLocators:
     @staticmethod
     def product_name(name: str) -> tuple[By, str]:
         '''
-        Вернуть совокупный локатор в виде кортежа из метода поиска элемента (By) и локатора элемента (str)
+        Возвращает совокупный локатор в виде кортежа из метода поиска элемента и локатора элемента
 
-        :param name: краткое наименование товара (содержится в полном названии WebElement-а) (str)
+        :param name: краткое наименование товара (содержится в полном названии WebElement-а)
         '''
         return By.XPATH, f"//div[@class='inventory_item_name'][contains(text(),'{name}')]"
 
