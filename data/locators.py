@@ -68,7 +68,7 @@ class ProductsPageLocators:
 
         :param name: краткое наименование товара (содержится в полном названии WebElement-а)
         '''
-        return By.XPATH, f"//div[@class='inventory_item_name'][contains(text(),'{name}')]"
+        return By.XPATH, f"//div[contains(@class, 'inventory_item_name')][contains(text(),'{name}')]"
 
 
 class StuffPageLocators:

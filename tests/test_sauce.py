@@ -15,6 +15,8 @@ class TestSauce():
         products_page = ProductsPage(browser)
         products_page.add_to_cart(browser, 'Backpack', cart_data)
         products_page.add_to_cart(browser, 'T-Shirt', cart_data)
+        # products_page.add_to_cart(browser, 'Sauce Labs Backpack', cart_data)
+        # products_page.add_to_cart(browser, 'Sauce Labs Bolt T-Shirt', cart_data)
         cart_page = CartPage(browser)
         cart_page.go_cart(cart_data)
         checkout_page = CheckoutPage(browser)
