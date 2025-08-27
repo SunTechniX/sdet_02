@@ -1,5 +1,5 @@
 # base image
-FROM python:3.12
+FROM python:3.12-slim
 
 # specify the port number the container should expose
 # EXPOSE 5001
@@ -11,11 +11,11 @@ COPY requirements.txt $APPDIR
 RUN apt-get clean && \
     cd $APPDIR && \
     pip3 install --no-cache-dir -r $APPDIR/requirements.txt
-RUN wget https://storage.googleapis.com/chrome-for-testing-public/139.0.7258.138/linux64/chromedriver-linux64.zip && \
-    unzip chromedriver_linux64.zip && \
-    rm -rf /var/lib/apt/lists/* && \
-    mkdir $APPDIR/allure
+# RUN wget https://storage.googleapis.com/chrome-for-testing-public/139.0.7258.138/linux64/chromedriver-linux64.zip && \
+#     unzip chromedriver_linux64.zip && \
+#     rm -rf /var/lib/apt/lists/* && \
+#     mkdir $APPDIR/allure
 
 # run the application
-CMD pytest --alluredir=$APPDIR/allure
-
+# CMD pytest --alluredir=$APPDIR/allure
+CMD pytest -vv --browser_name hub ./tests/test_sauce_ss.py
